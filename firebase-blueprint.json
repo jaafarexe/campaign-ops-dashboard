@@ -1,0 +1,109 @@
+{
+  "entities": {
+    "Campaign": {
+      "title": "Campaign",
+      "description": "Video production campaign covering a batch of videos, single brief link, delivery drive link and nested videos",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "briefLink": { "type": "string" },
+        "deliveryLink": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "تم إرسال البريف",
+            "قيد المونتاج",
+            "تم التسليم",
+            "جارٍ النشر",
+            "اكتمل النشر والتسليم"
+          ]
+        },
+        "videos": {
+          "type": "array"
+        },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["code", "name", "briefLink", "status", "videos", "createdAt", "updatedAt"]
+    },
+    "OperationalRequest": {
+      "title": "OperationalRequest",
+      "description": "Fixed-field structured request from Operator to Editor",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["code", "account_data", "file_delivery"]
+        },
+        "subject": { "type": "string" },
+        "description": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "answered"]
+        },
+        "codeResponse": { "type": "string" },
+        "accountDataResponse": { "type": "array" },
+        "fileDeliveryResponse": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "answeredAt": { "type": "string" }
+      },
+      "required": ["type", "subject", "status", "createdAt"]
+    },
+    "Notice": {
+      "title": "Notice",
+      "description": "One-way notice from Operator to Editor",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "priority": {
+          "type": "string",
+          "enum": ["normal", "important", "urgent"]
+        },
+        "isRead": { "type": "boolean" },
+        "readAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "message", "priority", "isRead", "createdAt"]
+    },
+    "Incident": {
+      "title": "Incident",
+      "description": "Operational incident log for tracking ban rates, Platform rejections, and editing errors",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["حظر حساب", "تقييد حساب", "رفض من المنصة", "خطأ مونتاج", "تأخير تسليم"]
+        },
+        "platform": {
+          "type": "string",
+          "enum": ["TikTok", "Instagram", "YouTube"]
+        },
+        "accountHandle": { "type": "string" },
+        "relatedBriefCode": { "type": "string" },
+        "date": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "required": ["type", "platform", "accountHandle", "relatedBriefCode", "date"]
+    }
+  },
+  "firestore": {
+    "/campaigns/{campaignId}": {
+      "schema": { "$ref": "#/entities/Campaign" },
+      "description": "Collection of video production campaigns"
+    },
+    "/requests/{requestId}": {
+      "schema": { "$ref": "#/entities/OperationalRequest" },
+      "description": "Collection of operational requests"
+    },
+    "/notices/{noticeId}": {
+      "schema": { "$ref": "#/entities/Notice" },
+      "description": "Collection of one-way notices"
+    },
+    "/incidents/{incidentId}": {
+      "schema": { "$ref": "#/entities/Incident" },
+      "description": "Collection of operational incidents"
+    }
+  }
+}

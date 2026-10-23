@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="squircle"><rect x="0" y="0" width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <!-- Deep slate/ink rounded-square background -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="#1B2536"/>
+  <!-- Clip-frame outline (subtle editing frame) -->
+  <rect x="118" y="146" width="276" height="180" rx="26" fill="none" stroke="#8CA0B8" stroke-width="14" opacity="0.85"/>
+  <!-- White play triangle, centered in frame -->
+  <path d="M232 196 L312 236 L232 276 Z" fill="#FFFFFF" stroke-linejoin="round"/>
+  <!-- Amber editing-timeline accent bar beneath the triangle -->
+  <rect x="186" y="296" width="140" height="18" rx="9" fill="#F5A524"/>
+</svg>

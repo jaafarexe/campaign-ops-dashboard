@@ -1,0 +1,1 @@
+{"appId": "com.example.opsboard", "appName": "OpsBoard", "plugins": {"FirebaseAuthentication": {"providers": ["google.com"], "skipNativeAuth": false}}, "webDir": "www"}
